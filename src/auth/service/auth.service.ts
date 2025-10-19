@@ -47,6 +47,14 @@ export class AuthService {
             },
         });
 
+        if (createUserDto.role === 'PROVIDER') {
+            await this.prisma.providerProfile.create({
+                data: {
+                    userId: user.id,
+                },
+            });
+        }
+
         const { password, ...result } = user;
         return result;
     }
